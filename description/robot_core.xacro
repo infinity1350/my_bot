@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" xmlns:xarco="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     
     <material name = "white">
@@ -21,7 +21,11 @@
     <!--BASE LINK-->
 
     <link name = "base_link">
-                
+           <inertial>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+            <mass value = "1"/>
+            <inertia ixx = "0.1" ixy = "0" ixz = "0" iyy = "0.1" iyz = "0" izz = "0.1"/>
+           </inertial>     
     </link>
 
     <!--CHASSIS-->
@@ -50,11 +54,11 @@
              <origin xyz = "0.15 0 0.075"/>
         </collision>
 
-        <xarco:inertial_box mass = "0.5" x="0.3" y= " 0.3" z = "0.15">
+        <xacro:inertial_box mass = "0.5" x="0.3" y= " 0.3" z = "0.15">
             <origin xyz = "0.15 0 0.075" rpy = "0 0 0"/>
 
         
-        </xarco:inertial_box>
+        </xacro:inertial_box>
     </link>
 
     <!--LEFT WHEEL LINK-->
@@ -83,11 +87,11 @@
             </geometry>
         </collision>
 
-        <xarco:inertial_cylinder mass = "0.1" length="0.04" radius= " 0.05">
+        <xacro:inertial_cylinder mass = "0.1" length="0.04" radius= " 0.05">
             <origin xyz = "0 0 0" rpy = "0 0 0"/>
 
         
-        </xarco:inertial_cylinder>
+        </xacro:inertial_cylinder>
     </link>
 
     <!--RIGHT WHEEL LINK-->
@@ -116,11 +120,11 @@
             
         </collision>
 
-        <xarco:inertial_cylinder mass = "0.1" length="0.04" radius= " 0.05">
+        <xacro:inertial_cylinder mass = "0.1" length="0.04" radius= " 0.05">
             <origin xyz = "0 0 0" rpy = "0 0 0"/>
 
         
-        </xarco:inertial_cylinder>
+        </xacro:inertial_cylinder>
 
     </link>
 
@@ -140,11 +144,11 @@
             <material name = "ishaan"/>
         </visual>
 
-        <xarco:inertial_sphere mass = "0.1" radius= " 0.05">
+        <xacro:inertial_sphere mass = "0.1" radius= " 0.05">
             <origin xyz = "0 0 0" rpy = "0 0 0"/>
 
         
-        </xarco:inertial_sphere>
+        </xacro:inertial_sphere>
     </link>
 
 
