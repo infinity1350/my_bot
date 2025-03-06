@@ -4,29 +4,29 @@
     <xacro:macro name="inertial_sphere" params="mass raduis *origin">
         <inertial>
             <mass value="${mass}"/>
-            <inertia ixx = "$(2/5)*mass*(raduis*radius)" ixy ="0.0" ixz = "0.0"
-                iyy = "$(2/5)*mass*(raduis*radius)" iyz = "0.0"
-                izz = "$(2/5)*mass*(raduis*radius)"/>
+            <inertia ixx = "${(2/5)*mass*(raduis*radius)}" ixy ="0.0" ixz = "0.0"
+                iyy = "${(2/5)*mass*(raduis*radius)}" iyz = "0.0"
+                izz = "${(2/5)*mass*(raduis*radius)}"/>
 
         </inertial>
         
     </xacro:macro>
 
     <xacro:macro name = "inertial_box" params = "mass size *origin">
-    =<inertial>
-        <mass value = "${mass}"/>>
-        <inertia ixx ="(1/12)*mass * radius (y*y + z*z)" ixy ="0.0" ixz = "0.0"
-                iyy = "(1/12)*mass * radius (y*y + z*z)" iyz = "0.0"
-                izz = "(1/12)*mass * radius (y*y + z*z)"/>
+    <inertial>
+        <mass value = "${mass}"/>
+        <inertia ixx ="${(1/12)*mass * radius (y*y + z*z)}" ixy ="0.0" ixz = "0.0"
+                iyy = "${(1/12)*mass * radius (x*x + z*z)}" iyz = "0.0"
+                izz = "${(1/12)*mass * radius (x*x + y*y)}"/>
     </inertial>
     </xacro:macro>
 
     <xacro:macro name = "inertial_cylinder" params = "mass radius height *origin">
         <inertial>
             <mass value="${mass}"/>
-            <inertia ixx = "$(1/12)*mass*(3*radius*radius + height*height)" ixy ="0.0" ixz = "0.0"
-                iyy = "$(1/12)*mass*(3*radius*radius + height*height)" iyz = "0.0"
-                izz = "$(1/2)*mass*radius*radius"/>
+            <inertia ixx = "${(1/12)*mass*(3*radius*radius + height*height)}" ixy ="0.0" ixz = "0.0"
+                iyy = "${(1/12)*mass*(3*radius*radius + height*height)}" iyz = "0.0"
+                izz = "${(1/2)*mass*radius*radius}"/>
         </inertial>
     </xacro:macro>
 </robot>
