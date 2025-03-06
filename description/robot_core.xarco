@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  >
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" xmlns:xarco="http://www.ros.org/wiki/xacro">
 
+    
     <material name = "white">
         <color rgba="1 1 1 1"/>
     </material>
@@ -40,6 +41,20 @@
             <material name = "blue"/>
              <origin xyz = "0.15 0 0.075"/>
         </visual>
+
+        
+        <collision>
+           <geometry>
+               <box size = "0.3 0.3 0.15"/>
+            </geometry>
+             <origin xyz = "0.15 0 0.075"/>
+        </collision>
+
+        <xarco:inertial_box mass = "0.5" x="0.3" y= " 0.3" z = "0.15">
+            <origin xyz = "0.15 0 0.075" rpy = "0 0 0"/>
+
+        
+        </xarco:inertial_box>
     </link>
 
     <!--LEFT WHEEL LINK-->
@@ -48,7 +63,8 @@
         
         <parent link = "base_link"/>
         <child link = "left_wheel"/>
-        <origin xyz = "0.175 0 0" rpy = "-${pi/2} 0 0"/>
+        <origin xyz = "0 0.175 0" rpy = "-${pi/2} 0 0"/>
+        <axis xyz = "0 0 1"/>
     
     </joint>
 
@@ -60,5 +76,78 @@
             <material name = "orange"/>
 
         </visual>
+
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="0.04"/>
+            </geometry>
+        </collision>
+
+        <xarco:inertial_cylinder mass = "0.1" length="0.04" radius= " 0.05">
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+
+        
+        </xarco:inertial_cylinder>
     </link>
+
+    <!--RIGHT WHEEL LINK-->
+
+    <joint name="right_wheel_joint" type="continuous">
+        
+        <parent link = "base_link"/>
+        <child link = "right_wheel"/>
+        <origin xyz = "0 -0.175 0" rpy = "${pi/2} 0 0"/>
+        <axis xyz = "0 0 -1"/>
+    
+    </joint>
+
+    <link name = "right_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.05" length="0.04"/>
+            </geometry>
+            <material name = "orange"/>
+            
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="0.04"/>
+            </geometry>
+            
+        </collision>
+
+        <xarco:inertial_cylinder mass = "0.1" length="0.04" radius= " 0.05">
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+
+        
+        </xarco:inertial_cylinder>
+
+    </link>
+
+    <!--CASTER WHEEL LINK-->
+
+    <joint name = "caster_wheel_wheel" type = "fixed">
+        <parent link = "base_link"/>
+        <child link = "caster_wheel"/>
+        <origin xyz = "0.24 0 0" rpy = "0 0 0"/>
+    </joint>
+
+    <link name = "caster_wheel">
+        <visual>
+            <geometry>
+                <sphere radius = "0.05"/>  
+            </geometry>
+            <material name = "ishaan"/>
+        </visual>
+
+        <xarco:inertial_sphere mass = "0.1" radius= " 0.05">
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+
+        
+        </xarco:inertial_sphere>
+    </link>
+
+
+
+    
 </robot>
