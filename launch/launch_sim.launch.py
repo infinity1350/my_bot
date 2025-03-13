@@ -1,10 +1,9 @@
 import os
-
 from launch import LaunchDescription
 from ament_index_python.packages import get_package_share_directory
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.actions import IncludeLaunchDescription
-
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 def generate_launch_description():
@@ -20,19 +19,28 @@ def generate_launch_description():
 
     )
 
-    #include the gazebo launch file
+    #declare the world path
+    default_world = os.path.join(get_package_share_directory(package_name), 'worlds', 'empty.world')
+    
+    #declare the world argument
+    world = LaunchConfiguration('world')
 
+    world_arg = DeclareLaunchArgument('world', default_value=default_world, description='Loading World file')
+
+
+    #include the gazebo launch file
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(os.path.join(
                     get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py'
-                ))
+                )), launch_arguments = {'gz_args': ['-r -v4', world], 'on_exit_shutdown':'true'}.items()
                 
     )
 
     #include the spwan robot launch file
     spawn_robot = Node(package = 'ros_gz_sim', executable = 'create', 
                         arguments = ['-topic', 'robot_description',
-                                      '-entity', 'robot'],
+                                      '-name', 'my_bot',
+                                      '-z', '0.1',],
                         output = 'screen'
     )
 
@@ -40,4 +48,5 @@ def generate_launch_description():
     ld.add_action(rsp)
     ld.add_action(gazebo)
     ld.add_action(spawn_robot)
+    ld.add_action(world_arg)
     return ld
