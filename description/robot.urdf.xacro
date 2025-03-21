@@ -4,5 +4,6 @@
     <!-- Example link -->
     <xacro:include filename = "robot_core.xacro"/>
     <xacro:include filename = "robot_control.xarco"/>
+    <xacro:include filename = "lidar.xarco"/>
 
 </robot>
