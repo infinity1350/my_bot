@@ -40,6 +40,7 @@
         </collision>
     </link>
 
+
     <!-- CHASSIS -->
     <joint name="chassis_joint" type="fixed">
         <parent link="base_link"/>

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <joint name = "lidar_joint" type="fixed">
+    <joint name = "laser_joint" type="fixed">
         
-        <parent link="base_link"/>
+        <parent link= "base_link"/>
         <child link="laser_frame"/>
         <origin xyz="-0.1 0 0.09" rpy="0 0 0"/>
     </joint>
@@ -23,10 +23,9 @@
     <gazebo reference = "laser_frame">
         <sensor name = "laser" type = "gpu_lidar">
         <pose>0 0 0 0 0 0</pose>
-            <visualize>true</visualize>
+            <visualize>false</visualize>
             <update_rate>10</update_rate>
-            <topic>scan</topic>
-            <!-- <gz_frame_id>laser_frame</gz_frame_id> -->
+            
             <lidar>
                 <scan>
                     <horizontal>
@@ -40,7 +39,8 @@
                     <max>12</max>
                 </range>
             </lidar>
-            
+            <topic>scan</topic>
+            <gz_frame_id>laser_frame</gz_frame_id>
         </sensor>
     </gazebo>
 </robot>
